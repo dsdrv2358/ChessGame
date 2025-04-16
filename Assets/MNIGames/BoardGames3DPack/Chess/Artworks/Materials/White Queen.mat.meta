@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a1cc38fcd38907a4caf26b2af97f2304
+timeCreated: 1430158254
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Chess/Artworks/Materials/White Queen.mat
+  uploadId: 493666

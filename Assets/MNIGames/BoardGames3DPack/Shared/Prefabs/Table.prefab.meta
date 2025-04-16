@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d29c00dba25a2434db910688e6a98e91
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Shared/Prefabs/Table.prefab
+  uploadId: 493666

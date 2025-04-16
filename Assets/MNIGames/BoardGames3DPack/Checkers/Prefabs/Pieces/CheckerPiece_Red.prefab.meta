@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c165b0cffdbabc846b7d0606725f96f7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Checkers/Prefabs/Pieces/CheckerPiece_Red.prefab
+  uploadId: 493666

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fb9fb7fc1e70d834abd1fc9971314b34
+timeCreated: 1430159101
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Chess/Scenes/Chess.unity
+  uploadId: 493666

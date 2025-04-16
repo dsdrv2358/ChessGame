@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: da5c0994ae524864cb5fafd415d85897
+timeCreated: 1491415479
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Chess/Artworks/Materials/Highlight_Green.mat
+  uploadId: 493666

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c7c04ba0e7b74b84a9b0e015ca4d2c7e
+timeCreated: 1490718516
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Shared/Artworks/Materials/Plane1x1.mat
+  uploadId: 493666

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3b2e02f2b5d375c4787956822efd0bab
+timeCreated: 1430158090
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Chess/Artworks/Materials/Chess Board.mat
+  uploadId: 493666

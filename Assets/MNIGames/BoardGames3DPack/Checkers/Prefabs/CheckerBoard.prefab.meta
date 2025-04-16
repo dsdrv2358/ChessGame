@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b6c21698d08fa1d4986dfca8a510ff5f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Checkers/Prefabs/CheckerBoard.prefab
+  uploadId: 493666

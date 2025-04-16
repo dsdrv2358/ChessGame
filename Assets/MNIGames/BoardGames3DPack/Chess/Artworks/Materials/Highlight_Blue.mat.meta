@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c9a7435676eca664a94225de4bd631e4
+timeCreated: 1490720311
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Chess/Artworks/Materials/Highlight_Blue.mat
+  uploadId: 493666

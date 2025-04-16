@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0f71b894fc0241c49863c332435366a6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Checkers/Prefabs/Pieces/CheckerPiece_Black.prefab
+  uploadId: 493666

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 98becafa0dc3cd44c8d07ed4b337bea1
+timeCreated: 1430158598
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Chess/Artworks/Materials/Black Queen.mat
+  uploadId: 493666

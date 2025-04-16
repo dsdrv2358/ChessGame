@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 803e41b1d4325a74894141fa220e44e4
+timeCreated: 1430158598
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Chess/Artworks/Materials/Black King.mat
+  uploadId: 493666

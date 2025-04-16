@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b6eb983f36505d040ac9a228e0aba85f
+timeCreated: 1528282946
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39912
+  packageName: Board Games 3D Pack
+  packageVersion: 1.5.0
+  assetPath: Assets/MNIGames/BoardGames3DPack/Shared/Animations/Floating.anim
+  uploadId: 493666
