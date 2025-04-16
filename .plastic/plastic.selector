@@ -1,4 +1,0 @@
-repository "Chess2/Chess2@2475816698771@cloud"
-  path "/"
-    br "/main"
-    co "/main"

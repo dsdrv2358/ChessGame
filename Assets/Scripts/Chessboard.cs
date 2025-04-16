@@ -16,6 +16,7 @@ public class Chessboard : MonoBehaviour
 
     //LOGIC
     private ChessPiece[,] chessPieces;
+    private ChessPiece currentlyDragging;
     private const int TILE_COUNT_X = 8;
     private const int TILE_COUNT_Y = 8;
     private GameObject[,] tiles;
@@ -58,8 +59,18 @@ public class Chessboard : MonoBehaviour
                 currentHover = hitPosition;
                 tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
             }
-        }
+        
+            // If we press down on the mouse
+            if(Input.GetMouseButtonDown(0))
+            {
 
+            }
+
+            if(Input.GetMouseButtonUp(0))
+            {
+                
+            }
+        }
         else
         {
             if(currentHover != -Vector2Int.one)
