@@ -82,7 +82,7 @@ public class Chessboard : MonoBehaviour
                 bool validMove = MoveTo(currentlyDragging, hitPosition.x, hitPosition.y);
                 if (!validMove)
                 {
-                    currentlyDragging.transform.position = GetTileCenter(previousPosition.x, previousPosition.y);
+                    currentlyDragging.SetPosition(GetTileCenter(previousPosition.x, previousPosition.y));
                     currentlyDragging = null;
                 }
             }
@@ -190,7 +190,7 @@ public class Chessboard : MonoBehaviour
     {
         chessPieces[x,y].currentX = x;
         chessPieces[x,y].currentY = y;
-        chessPieces[x,y].transform.position = GetTileCenter(x, y);
+        chessPieces[x,y].SetPosition(GetTileCenter(x, y), force);
     }
     private Vector3 GetTileCenter(int x, int y)
     {
