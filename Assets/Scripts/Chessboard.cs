@@ -202,6 +202,15 @@ public class Chessboard : MonoBehaviour
     {
         Vector2Int previousPosition = new Vector2Int(cp.currentX, cp.currentY);
 
+        // Is there anothe piece in the target position?
+        if (chessPieces[x, y] != null)
+        {
+            ChessPiece ocp = chessPieces[x, y];
+
+            if (cp.team == ocp.team)
+                return false;
+        }
+        
         chessPieces[x, y] = cp;
         chessPieces[previousPosition.x, previousPosition.y] = null;
 
