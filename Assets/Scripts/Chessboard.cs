@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -46,14 +47,14 @@ public class Chessboard : MonoBehaviour
             Vector2Int hitPosition = LookupTileIndex(info.transform.gameObject);
 
             // If we're hovering a tile after not havering any tiles
-            if(currentHover == -Vector2Int.one)
+            if (currentHover == -Vector2Int.one)
             {
                 currentHover = hitPosition;
                 tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
             }
 
             // If we were already hovering a tile, change the previous one
-            if(currentHover != hitPosition)
+            if (currentHover != hitPosition)
             {
                 tiles[currentHover.x, currentHover.y].layer = LayerMask.NameToLayer("Tile");
                 currentHover = hitPosition;
@@ -61,19 +62,34 @@ public class Chessboard : MonoBehaviour
             }
         
             // If we press down on the mouse
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
-
+                if (chessPieces[hitPosition.x, hitPosition.y] != null)
+                {
+                    // Is it our turn?
+                    if (true)
+                    {
+                        currentlyDragging = chessPieces[hitPosition.x,hitPosition.y];
+                    }
+                }
             }
 
-            if(Input.GetMouseButtonUp(0))
+            // If we are releasing the mouse button
+            if (currentlyDragging != null && Input.GetMouseButtonUp(0))
             {
-                
+                Vector2Int previousPosition = new Vector2Int(currentlyDragging.currentX, currentlyDragging.currentY);
+            
+                bool validMove = MoveTo(currentlyDragging, hitPosition.x, hitPosition.y);
+                if (!validMove)
+                {
+                    currentlyDragging.transform.position = GetTileCenter(previousPosition.x, previousPosition.y);
+                    currentlyDragging = null;
+                }
             }
         }
         else
         {
-            if(currentHover != -Vector2Int.one)
+            if (currentHover != -Vector2Int.one)
             {
                 tiles[currentHover.x, currentHover.y].layer = LayerMask.NameToLayer("Tile");
                 currentHover = -Vector2Int.one;
@@ -167,7 +183,7 @@ public class Chessboard : MonoBehaviour
     {
         for (int x = 0; x < TILE_COUNT_X; x++)
             for (int y = 0; y < TILE_COUNT_Y; y++)
-                if(chessPieces[x,y] != null)
+                if (chessPieces[x,y] != null)
                     PositionSinglePiece(x, y, true);
     }
     private void PositionSinglePiece(int x, int y, bool force = false)
@@ -182,11 +198,22 @@ public class Chessboard : MonoBehaviour
     }
 
     // Operations
+    private bool MoveTo(ChessPiece cp, int x, int y)
+    {
+        Vector2Int previousPosition = new Vector2Int(cp.currentX, cp.currentY);
+
+        chessPieces[x, y] = cp;
+        chessPieces[previousPosition.x, previousPosition.y] = null;
+
+        PositionSinglePiece(x,y);
+
+        return true;
+    }
     private Vector2Int LookupTileIndex(GameObject hitInfo)
     {
         for (int x = 0; x < TILE_COUNT_X; x++)
             for (int y = 0; y < TILE_COUNT_Y; y++)
-                if(tiles[x,y] == hitInfo)
+                if (tiles[x,y] == hitInfo)
                     return new Vector2Int(x,y);
 
         return -Vector2Int.one; // Invalid
