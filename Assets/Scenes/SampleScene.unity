@@ -140,6 +140,9 @@ MonoBehaviour:
   tileSize: 0.7
   yOffset: 0.15
   boardCenter: {x: 0, y: 0, z: 0}
+  deathSize: 0.5
+  deathSpacing: 0.3725
+  dragOffset: 1
   prefabs:
   - {fileID: 618382796127737598, guid: 88b76a48d7b53d84abab5e0ee1a4c06b, type: 3}
   - {fileID: 7815952161391030299, guid: 1dd499ba226d7184e9b10978a0c93159, type: 3}
@@ -357,8 +360,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5237704, y: -0, z: -0, w: 0.8518595}
-  m_LocalPosition: {x: 0, y: 5.75, z: -3.5}
+  m_LocalRotation: {x: 0.5420454, y: 0.0020163297, z: -0.0013019262, w: 0.84034574}
+  m_LocalPosition: {x: 0.4737582, y: 6.086085, z: -3.053764}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
