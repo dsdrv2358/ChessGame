@@ -359,6 +359,13 @@ public class Chessboard : MonoBehaviour
                     chessPieces[lastMove[1].x, lastMove[1].y] = newQueen;
                     PositionSinglePiece(lastMove[1].x, lastMove[1].y, true);
                 }
+                if (targetPawn.team == 1 && lastMove[1].y == 0)
+                {
+                    ChessPiece newQueen = SpawnSinglePiece(ChessPieceType.Queen, 1);
+                    Destroy(chessPieces[lastMove[1].x, lastMove[1].y].gameObject);
+                    chessPieces[lastMove[1].x, lastMove[1].y] = newQueen;
+                    PositionSinglePiece(lastMove[1].x, lastMove[1].y, true);
+                }
             }
         }
 
