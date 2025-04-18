@@ -13,6 +13,17 @@ public class Pawn : ChessPiece
         if (board[currentX,currentY + direction] == null)
             r.Add(new Vector2Int(currentX, currentY + direction));
 
+        // Two in front
+        if (board[currentX,currentY + direction] == null)
+        {
+            // White team
+            if (team == 0 && currentY == 1 && board[currentX, currentY + (direction * 2)] == null)
+                r.Add(new Vector2Int(currentX, currentY + (direction * 2)));
+            // Black team
+            if (team == 1 && currentY == 6 && board[currentX, currentY + (direction * 2)] == null)
+                r.Add(new Vector2Int(currentX, currentY + (direction * 2)));
+        }
+
         return r;
     }
 }
