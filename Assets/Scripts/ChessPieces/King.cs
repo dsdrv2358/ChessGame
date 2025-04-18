@@ -90,8 +90,44 @@ public class King : ChessPiece
                                 if (board[2,0] == null)
                                     if (board[1,0] == null)
                                     {
-                                        availableMoves.Add(new Vector2Int(2,0));
+                                        availableMoves.Add(new Vector2Int(2, 0));
+                                        r = SpecialMove.Castling;
                                     }
+
+                // Right Rook
+                if (rightRook == null)
+                    if (board[7, 0].type == ChessPieceType.Rook)
+                        if (board[7,0].team == 0)
+                            if (board[5,0] == null)
+                                if (board[6,0] == null)
+                                {
+                                    availableMoves.Add(new Vector2Int(6, 0));
+                                    r = SpecialMove.Castling;
+                                }
+            }
+            else // Black team
+            {
+                // Left Rook
+                if (leftRook == null)
+                    if (board[0, 7].type == ChessPieceType.Rook)
+                        if (board[0,7].team == 1)
+                            if (board[3,7] == null)
+                                if (board[2,7] == null)
+                                    if (board[1,7] == null)
+                                    {
+                                        availableMoves.Add(new Vector2Int(2, 7));
+                                        r = SpecialMove.Castling;
+                                    }
+                // Right Rook
+                if (rightRook == null)
+                    if (board[7, 7].type == ChessPieceType.Rook)
+                        if (board[7,7].team == 1)
+                            if (board[5,7] == null)
+                                if (board[6,7] == null)
+                                {
+                                    availableMoves.Add(new Vector2Int(6, 7));
+                                    r = SpecialMove.Castling;
+                                }
             }
         }
 
