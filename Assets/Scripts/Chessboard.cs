@@ -306,6 +306,15 @@ public class Chessboard : MonoBehaviour
         Application.Quit();
     }
 
+    // Special Moves
+    private void ProcessSpecialMove()
+    {
+        if (specialMove == SpecialMove.EnPassant)
+        {
+            
+        }
+    }
+
     // Operations
     private bool ContainsValidMove(ref List<Vector2Int> moves, Vector2Int pos)
     {
@@ -366,6 +375,8 @@ public class Chessboard : MonoBehaviour
 
         isWhiteTurn = !isWhiteTurn;
         moveList.Add(new Vector2Int[] {previousPosition, new Vector2Int(x,y)});
+
+        ProcessSpecialMove();
 
         return true;
     }
