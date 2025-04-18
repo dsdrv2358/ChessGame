@@ -345,6 +345,23 @@ public class Chessboard : MonoBehaviour
             }
         }
     
+        if (specialMove == SpecialMove.Promotion)
+        {
+            Vector2Int[] lastMove = moveList[moveList.Count - 1];
+            ChessPiece targetPawn = chessPieces[lastMove[1].x, lastMove[1].y];
+
+            if (targetPawn.type == ChessPieceType.Pawn)
+            {
+                if (targetPawn.team == 0 && lastMove[1].y == 7)
+                {
+                    ChessPiece newQueen = SpawnSinglePiece(ChessPieceType.Queen, 0);
+                    Destroy(chessPieces[lastMove[1].x, lastMove[1].y].gameObject);
+                    chessPieces[lastMove[1].x, lastMove[1].y] = newQueen;
+                    PositionSinglePiece(lastMove[1].x, lastMove[1].y, true);
+                }
+            }
+        }
+
         if (specialMove == SpecialMove.Castling)
         {
             Vector2Int[] lastMove = moveList[moveList.Count - 1];
