@@ -77,6 +77,24 @@ public class King : ChessPiece
         var leftRook = moveList.Find(m => m[0].x == 0 && m[0].y == ((team == 0) ? 0 : 7));
         var rightRook = moveList.Find(m => m[0].x == 7 && m[0].y == ((team == 0) ? 0 : 7));
 
+        if (kingMove == null && currentX == 4)
+        {
+            // White team
+            if (team == 0)
+            {
+                // Left Rook
+                if (leftRook == null)
+                    if (board[0, 0].type == ChessPieceType.Rook)
+                        if (board[0,0].team == 0)
+                            if (board[3,0] == null)
+                                if (board[2,0] == null)
+                                    if (board[1,0] == null)
+                                    {
+                                        availableMoves.Add(new Vector2Int(2,0));
+                                    }
+            }
+        }
+
         return r;
     }
 }
