@@ -461,6 +461,35 @@ public class Chessboard : MonoBehaviour
                 }
             }
 
+            if (cp.type == ChessPieceType.King && Mathf.Abs(actualX - simX) == 2)
+            {
+                // Get attacking moves from ORIGINAL board state
+                List<Vector2Int> currentAttackingMoves = new List<Vector2Int>();
+                foreach (ChessPiece attacker in simAttackingPieces)
+                {
+                    var attackerMoves = attacker.GetAvailableMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y);
+                    currentAttackingMoves.AddRange(attackerMoves);
+                }
+
+                // 1. Check if king is currently in check
+                bool isInCheck = ContainsValidMove(ref currentAttackingMoves, new Vector2Int(actualX, actualY));
+                if (isInCheck)
+                {
+                    movesToRemove.Add(moves[i]);
+                    continue;
+                }
+
+                // 2. Check intermediate square
+                int direction = (simX > actualX) ? 1 : -1;
+                int throughSquareX = actualX + direction;
+                bool throughAttacked = ContainsValidMove(ref currentAttackingMoves, new Vector2Int(throughSquareX, actualY));
+                if (throughAttacked)
+                {
+                    movesToRemove.Add(moves[i]);
+                    continue;
+                }
+            }
+
             // Simulate that move
             simulation[actualX, actualY] = null;
             cp.currentX = simX;
@@ -481,27 +510,7 @@ public class Chessboard : MonoBehaviour
                     simMoves.Add(pieceMoves[b]);
             }
 
-            // Special castling rules
-            if (cp.type == ChessPieceType.King && Mathf.Abs(actualX - simX) == 2) // This is a castling move
-            {
-                // Check if king is currently in check (can't castle out of check)
-                bool isInCheck = ContainsValidMove(ref simMoves, new Vector2Int(actualX, actualY));
-                if (isInCheck)
-                {
-                    movesToRemove.Add(moves[i]);
-                    continue;
-                }
-
-                // Check if king moves through attacked square (can't castle through check)
-                int direction = (simX > actualX) ? 1 : -1; // 1 for kingside, -1 for queenside
-                int throughSquareX = actualX + direction;
-                bool throughSquareAttacked = ContainsValidMove(ref simMoves, new Vector2Int(throughSquareX, actualY));
-                if (throughSquareAttacked)
-                {
-                    movesToRemove.Add(moves[i]);
-                    continue;
-                }
-            }
+            
 
             // Is the king in trouble? If so, remove the move
             if (ContainsValidMove(ref simMoves, kingPositionThisSim))
