@@ -271,6 +271,7 @@ public class Chessboard : MonoBehaviour
         // UI
         victoryScreen.transform.GetChild(0).gameObject.SetActive(false);
         victoryScreen.transform.GetChild(1).gameObject.SetActive(false);
+        victoryScreen.transform.GetChild(2).gameObject.SetActive(false);
         victoryScreen.SetActive(false);
 
         // Fields reset
@@ -461,6 +462,7 @@ public class Chessboard : MonoBehaviour
                 }
             }
 
+            // Castling Logic - cannot go through or out of check
             if (cp.type == ChessPieceType.King && Mathf.Abs(actualX - simX) == 2)
             {
                 // Get attacking moves from ORIGINAL board state
@@ -527,57 +529,63 @@ public class Chessboard : MonoBehaviour
         for (int i = 0; i < movesToRemove.Count; i++)
             moves.Remove(movesToRemove[i]);
     }
-    private bool CheckForCheckmate()
+    private int CheckForCheckmate()
     {
         var lastMove = moveList[moveList.Count - 1];
-        int targetTeam = (chessPieces[lastMove[1].x, lastMove[1].y].team == 0) ? 1 : 0;
+        int targetTeam = (chessPieces[lastMove[1].x, lastMove[1].y].team == 0)? 1 : 0;
 
         List<ChessPiece> attackingPieces = new List<ChessPiece>();
         List<ChessPiece> defendingPieces = new List<ChessPiece>();
         ChessPiece targetKing = null;
         for (int x = 0; x < TILE_COUNT_X; x++)
             for (int y = 0; y < TILE_COUNT_Y; y++)
-                if (chessPieces[x,y] != null)
+                if (chessPieces[x, y] != null)
                 {
-                    if (chessPieces[x,y].team == targetTeam)
+                    if (chessPieces[x, y].team == targetTeam)
                     {
                         defendingPieces.Add(chessPieces[x, y]);
                         if (chessPieces[x,y].type == ChessPieceType.King)
                             targetKing = chessPieces[x, y];
-                    }                
+                    }
                     else
                     {
                         attackingPieces.Add(chessPieces[x, y]);
                     }
                 }
-    
-        // Is the king attacked right now?
+
+        //Is the King under attacked
         List<Vector2Int> currentAvailableMoves = new List<Vector2Int>();
-        for (int i = 0; i < attackingPieces.Count; i++)
+        for (int i = 0; i < attackingPieces.Count;i++)
         {
             var pieceMoves = attackingPieces[i].GetAvailableMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y);
             for (int b = 0; b < pieceMoves.Count; b++)
                 currentAvailableMoves.Add(pieceMoves[b]);
         }
 
-        // Are we in check right now?
+        //Are we in check right now?
         if (ContainsValidMove(ref currentAvailableMoves, new Vector2Int(targetKing.currentX, targetKing.currentY)))
         {
-            // King is under attack, can we move something to help him?
+            //King is under attack,can we move something to help him?
+            for (int i = 0; i< defendingPieces.Count;i++)
+            {
+                List<Vector2Int> defendingMoves = defendingPieces[i].GetAvailableMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y);
+                SimulateMoveForSinglePiece(defendingPieces[i], ref defendingMoves, targetKing);
+                if (defendingMoves.Count != 0)
+                    return 0;
+            }
+            return 1;//CheckMate Exit
+        }
+        else 
+        {
             for (int i = 0; i < defendingPieces.Count; i++)
             {
                 List<Vector2Int> defendingMoves = defendingPieces[i].GetAvailableMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y);
-                // Since we're sending ref availableMoves, we will be deleting moves that would put us in check
                 SimulateMoveForSinglePiece(defendingPieces[i], ref defendingMoves, targetKing);
-
                 if (defendingMoves.Count != 0)
-                    return false;
+                    return 0;
             }
-
-            return true; // Checkmate exit
+            return 2; //staleMate Exit
         }
-
-        return false;
     }
 
     // Operations
@@ -643,8 +651,17 @@ public class Chessboard : MonoBehaviour
 
         ProcessSpecialMove();
 
-        if (CheckForCheckmate())
-            CheckMate(cp.team);
+        switch (CheckForCheckmate())
+        {
+            default:
+                break;
+            case 1:
+                CheckMate(cp.team);
+                break;
+            case 2:
+                CheckMate(2);
+                break;
+        }
 
         return true;
     }
