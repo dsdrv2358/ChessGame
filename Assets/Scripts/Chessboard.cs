@@ -486,7 +486,9 @@ public class Chessboard : MonoBehaviour
                 movesToRemove.Add(moves[i]);
             }
 
-            
+            // Restore the actual CP data
+            cp.currentX = actualX;
+            cp.currentY = actualY;
         }
 
         // Remove from the current available move list
