@@ -496,6 +496,10 @@ public class Chessboard : MonoBehaviour
         for (int i = 0; i < movesToRemove.Count; i++)
             moves.Remove(movesToRemove[i]);
     }
+    private bool CheckForCheckmate()
+    {
+
+    }
 
     // Operations
     private bool ContainsValidMove(ref List<Vector2Int> moves, Vector2Int pos)
@@ -559,6 +563,9 @@ public class Chessboard : MonoBehaviour
         moveList.Add(new Vector2Int[] {previousPosition, new Vector2Int(x,y)});
 
         ProcessSpecialMove();
+
+        if (CheckForCheckmate())
+            CheckMate(cp.team);
 
         return true;
     }
