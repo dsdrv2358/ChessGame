@@ -470,6 +470,17 @@ public class Chessboard : MonoBehaviour
             var deadPiece = simAttackingPieces.Find(c => c.currentX == simX && c.currentY == simY);
             if (deadPiece != null)
                 simAttackingPieces.Remove(deadPiece);
+
+            // Get all the simulated attacking pieces' moves
+            List<Vector2Int> simMoves = new List<Vector2Int>();
+            for (int a = 0; a < simAttackingPieces.Count; a++)
+            {
+                var pieceMoves = simAttackingPieces[a].GetAvailableMoves(ref simulation, TILE_COUNT_X, TILE_COUNT_Y);
+                for (int b = 0; b < pieceMoves.Count; b++)
+                    simMoves.Add(pieceMoves[b]);
+            }
+
+            // Is the king in trouble? If so, remove the move
         }
 
         // Remove from the current available move list
