@@ -481,6 +481,28 @@ public class Chessboard : MonoBehaviour
                     simMoves.Add(pieceMoves[b]);
             }
 
+            // Special castling rules
+            if (cp.type == ChessPieceType.King && Mathf.Abs(actualX - simX) == 2) // This is a castling move
+            {
+                // Check if king is currently in check (can't castle out of check)
+                bool isInCheck = ContainsValidMove(ref simMoves, new Vector2Int(actualX, actualY));
+                if (isInCheck)
+                {
+                    movesToRemove.Add(moves[i]);
+                    continue;
+                }
+
+                // Check if king moves through attacked square (can't castle through check)
+                int direction = (simX > actualX) ? 1 : -1; // 1 for kingside, -1 for queenside
+                int throughSquareX = actualX + direction;
+                bool throughSquareAttacked = ContainsValidMove(ref simMoves, new Vector2Int(throughSquareX, actualY));
+                if (throughSquareAttacked)
+                {
+                    movesToRemove.Add(moves[i]);
+                    continue;
+                }
+            }
+
             // Is the king in trouble? If so, remove the move
             if (ContainsValidMove(ref simMoves, kingPositionThisSim))
             {
