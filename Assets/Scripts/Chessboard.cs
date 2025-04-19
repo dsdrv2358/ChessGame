@@ -419,9 +419,10 @@ public class Chessboard : MonoBehaviour
         ChessPiece targetKing = null;
         for (int x = 0; x < TILE_COUNT_X; x++)
             for (int y = 0; y < TILE_COUNT_Y; y++)
-                if (chessPieces[x,y].type == ChessPieceType.King)
-                    if (chessPieces[x,y].team == currentlyDragging.team)
-                        targetKing = chessPieces[x, y];
+                if (chessPieces[x,y] != null)
+                    if (chessPieces[x,y].type == ChessPieceType.King)
+                        if (chessPieces[x,y].team == currentlyDragging.team)
+                            targetKing = chessPieces[x, y];
 
         // Since we're sending ref availableMoves, we will be deleting moves that would put us in check
         SimulateMoveForSinglePiece(currentlyDragging, ref availableMoves, targetKing);
