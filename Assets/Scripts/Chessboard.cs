@@ -481,6 +481,12 @@ public class Chessboard : MonoBehaviour
             }
 
             // Is the king in trouble? If so, remove the move
+            if (ContainsValidMove(ref simMoves, kingPositionThisSim))
+            {
+                movesToRemove.Add(moves[i]);
+            }
+
+            
         }
 
         // Remove from the current available move list
