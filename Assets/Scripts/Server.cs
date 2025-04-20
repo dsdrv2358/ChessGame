@@ -81,4 +81,13 @@ public class Server : MonoBehaviour
             }
         }
     }
+    private void AcceptNewConnections()
+    {
+        // Accept new connections
+        NetworkConnection c;
+        while ((c = driver.Accept()) != default(NetworkConnection))
+        {
+            connections.Add(c);
+        }
+    }
 }
