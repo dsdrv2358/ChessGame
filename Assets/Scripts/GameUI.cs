@@ -18,4 +18,17 @@ public class GameUI : MonoBehaviour
     {
         Debug.Log("OnOnlineGameButton");
     }
+
+    public void OnOnlineHostButton()
+    {
+        Debug.Log("OnOnlineHostButton");
+    }
+    public void OnOnlineConnectButton()
+    {
+        Debug.Log("OnOnlineConnectButton");
+    }
+    public void OnOnlineBackButton()
+    {
+        Debug.Log("OnOnlineBackButton");
+    }
 }
