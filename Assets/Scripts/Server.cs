@@ -1,6 +1,7 @@
 using System;
 using Unity.Collections;
 using Unity.Networking.Transport;
+using UnityEditor.Rendering.Canvas.ShaderGraph;
 using UnityEngine;
 
 public class Server : MonoBehaviour
@@ -88,6 +89,28 @@ public class Server : MonoBehaviour
         while ((c = driver.Accept()) != default(NetworkConnection))
         {
             connections.Add(c);
+        }
+    }
+    private void UpdateMessagePump()
+    {
+        DataStreamReader stream;
+        for (int i = 0; i < connections.Length; i++)
+        {
+            NetworkEvent.Type cmd;
+            while ((cmd = driver.PopEventForConnection(connections[i], out stream)) != NetworkEvent.Type.Empty)
+            {
+                if (cmd == NetworkEvent.Type.Data)
+                {
+                    //NetUtility.OnData(stream, connections[i], this);
+                }
+                else if (cmd == NetworkEvent.Type.Disconnect)
+                {
+                    Debug.Log("Client disconnected from server");
+                    connections[i] = default(NetworkConnection);
+                    connectionDropped?.Invoke();
+                    Shutdown(); // This does not normally happen, it's just because we're in a two-person game
+                }
+            }
         }
     }
 }
