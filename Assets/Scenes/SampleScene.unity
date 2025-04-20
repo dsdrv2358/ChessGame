@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 3
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1442,7 +1442,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5420454, y: 0.0020163297, z: -0.0013019262, w: 0.84034574}
-  m_LocalPosition: {x: 0.4737582, y: 6.086085, z: -3.053764}
+  m_LocalPosition: {x: -11.68, y: 6.09, z: -2.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

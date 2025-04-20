@@ -31,4 +31,9 @@ public class GameUI : MonoBehaviour
     {
         Debug.Log("OnOnlineBackButton");
     }
+
+    public void OnHostBackButton()
+    {
+        Debug.Log("OnHostBackButton");
+    }
 }
