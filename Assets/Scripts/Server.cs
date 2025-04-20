@@ -56,4 +56,29 @@ public class Server : MonoBehaviour
     {
         Shutdown();
     }
+
+    public void Update()
+    {
+        if (!isActive)
+            return;
+        
+        //KeepAlive();
+
+        driver.ScheduleUpdate().Complete();
+        
+        CleanupConnections();
+        AcceptNewConnections();
+        UpdateMessagePump();
+    }
+    private void CleanupConnections()
+    {
+        for (int i = 0; i < connections.Length; i++)
+        {
+            if (!connections[i].IsCreated)
+            {
+                connections.RemoveAtSwapBack(i);
+                --i;
+            }
+        }
+    }
 }
