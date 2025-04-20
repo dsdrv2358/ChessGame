@@ -3034,6 +3034,7 @@ GameObject:
   - component: {fileID: 1347985546}
   - component: {fileID: 1347985545}
   - component: {fileID: 1347985549}
+  - component: {fileID: 1347985550}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3139,6 +3140,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987e8b4b3ca47144bad48c8daab2dc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuAnimator: {fileID: 0}
+--- !u!95 &1347985550
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347985544}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 84fa439fe2899c749836eb2527b3aaef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1423469300
 GameObject:
   m_ObjectHideFlags: 0

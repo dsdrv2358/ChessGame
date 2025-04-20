@@ -4,6 +4,8 @@ public class GameUI : MonoBehaviour
 {
     public static GameUI Instance { set; get; }
 
+    [SerializeField] private Animator menuAnimator;
+
     private void Awake()
     {
         Instance = this;
