@@ -7,6 +7,5 @@ public class GameUI : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
     }
 }
