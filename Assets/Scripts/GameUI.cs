@@ -8,4 +8,14 @@ public class GameUI : MonoBehaviour
     {
         Instance = this;
     }
+
+    // Buttons
+    public void OnLocalGameButton()
+    {
+        Debug.Log("OnLocalGameButton");
+    }
+    public void OnOnlineGameButton()
+    {
+        Debug.Log("OnOnlineGameButton");
+    }
 }
