@@ -1,6 +1,7 @@
 using System;
 using Unity.Collections;
 using Unity.Networking.Transport;
+using Unity.VisualScripting;
 using UnityEditor.Rendering.Canvas.ShaderGraph;
 using UnityEngine;
 
@@ -112,5 +113,23 @@ public class Server : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Server-specific
+    public void SendToClient(NetworkConnection connection, NetMessage msg)
+    {
+        DataStreamWriter writer;
+        driver.BeginSend(connection, out writer);
+    //  msg.Serialize(ref writer);
+        driver.EndSend(writer);
+    }
+    public void Broadcast(NetMessage msg)
+    {
+        for (int i = 0; i < connections.Length; i++)
+            if (connections[i].IsCreated)
+            {
+            //  Debug.Log($"Sending {msg.Code} to : {connections[i].InternalId}");
+                SendToClient(connections[i], msg);
+            }
     }
 }
