@@ -21,4 +21,23 @@ public class Server : MonoBehaviour
     private float lastKeepAlive;
 
     public Action connectionDropped;
+
+    // Methods
+    public void Init(ushort port)
+    {
+        driver = NetworkDriver.Create();
+        NetworkEndpoint endpoint = NetworkEndpoint.AnyIpv4;
+        endpoint.Port = port;
+
+        if (driver.Bind(endpoint) != 0)
+        {
+            Debug.Log("Unable to bind on port " + endpoint.Port);
+            return;
+        }
+        else
+        {
+            driver.Listen();
+            Debug.Log("Currently listening on port " + endpoint.Port);
+        }
+    }
 }
