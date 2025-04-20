@@ -52,4 +52,8 @@ public class Server : MonoBehaviour
             isActive = false;
         }
     }
+    public void OnDestroy()
+    {
+        Shutdown();
+    }
 }
