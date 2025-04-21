@@ -688,8 +688,8 @@ public class Chessboard : MonoBehaviour
         NetUtility.S_WELCOME += OnWelcomeServer;
 
         NetUtility.C_WELCOME += OnWelcomeClient;
+        NetUtility.C_START_GAME += OnStartGameClient;
     }
-
     private void UnRegisterEvents()
     {
 
@@ -715,7 +715,7 @@ public class Chessboard : MonoBehaviour
     }
 
     // Client
-        private void OnWelcomeClient(NetMessage msg)
+    private void OnWelcomeClient(NetMessage msg)
     {
         // Receive the connection message
         NetWelcome nw = msg as NetWelcome;
@@ -724,6 +724,10 @@ public class Chessboard : MonoBehaviour
         currentTeam = nw.AssignedTeam;
 
         Debug.Log($"My assigned team is {nw.AssignedTeam}");
+    }
+    private void OnStartGameClient(NetMessage obj)
+    {
+        // We just need to change the camera
     }
     #endregion
 }
