@@ -45,6 +45,10 @@ public class Chessboard : MonoBehaviour
     private SpecialMove specialMove;
     private List<Vector2Int[]> moveList = new List<Vector2Int[]>();
 
+    // Multi logic
+    private int playerCount = -1;
+    private int currentTeam = -1;
+
     private void Awake()
     {
         isWhiteTurn = true;
@@ -682,18 +686,38 @@ public class Chessboard : MonoBehaviour
     private void RegsisterEvents()
     {
         NetUtility.S_WELCOME += OnWelcomeServer;
+
+        NetUtility.C_WELCOME += OnWelcomeClient;
     }
+
     private void UnRegisterEvents()
     {
 
     }
 
     // Server
-    private void OnWelcomeServer(NetMessage arg1, NetworkConnection arg2)
+    private void OnWelcomeServer(NetMessage msg, NetworkConnection cnn)
     {
-        throw new NotImplementedException();
+        // Client has connected, assign a team and return the message back to him
+        NetWelcome nw = msg as NetWelcome;
+
+        // Assign a team
+        nw.AssignedTeam = ++playerCount;
+
+        // Return back to the client
+        Server.Instance.SendToClient(cnn, nw);
     }
 
     // Client
+        private void OnWelcomeClient(NetMessage msg)
+    {
+        // Receive the connection message
+        NetWelcome nw = msg as NetWelcome;
+
+        // Assign the team
+        currentTeam = nw.AssignedTeam;
+
+        Debug.Log($"My assigned team is {nw.AssignedTeam}");
+    }
     #endregion
 }
