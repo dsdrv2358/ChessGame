@@ -700,18 +700,22 @@ public class Chessboard : MonoBehaviour
     private void RegisterEvents()
     {
         NetUtility.S_WELCOME += OnWelcomeServer;
+        NetUtility.S_MAKE_MOVE += OnMakeMoveServer;
 
         NetUtility.C_WELCOME += OnWelcomeClient;
         NetUtility.C_START_GAME += OnStartGameClient;
+        NetUtility.C_MAKE_MOVE += OnMakeMoveClient;
 
         GameUI.Instance.SetLocalGame += OnSetLocalGame;
     }
     private void UnRegisterEvents()
     {
         NetUtility.S_WELCOME -= OnWelcomeServer;
+        NetUtility.S_MAKE_MOVE -= OnMakeMoveServer;
 
         NetUtility.C_WELCOME -= OnWelcomeClient;
         NetUtility.C_START_GAME -= OnStartGameClient;
+        NetUtility.C_MAKE_MOVE -= OnMakeMoveClient;
 
         GameUI.Instance.SetLocalGame -= OnSetLocalGame;
     }
@@ -734,6 +738,18 @@ public class Chessboard : MonoBehaviour
             Server.Instance.Broadcast(new NetStartGame());
         }
     }
+    private void OnMakeMoveServer(NetMessage msg, NetworkConnection cnn)
+    {
+        //Receive the message and just broadcast it back
+        NetMakeMove mm = msg as NetMakeMove;
+
+        // This is where we could do some validation checks!
+        // --
+
+        // Receive, and just broadcast it back
+        Server.Instance.Broadcast(msg);
+    }
+
 
     // Client
     private void OnWelcomeClient(NetMessage msg)
@@ -749,11 +765,27 @@ public class Chessboard : MonoBehaviour
         if(localGame && currentTeam == 0)
             Server.Instance.Broadcast(new NetStartGame());
     }
-    private void OnStartGameClient(NetMessage obj)
+    private void OnStartGameClient(NetMessage msg)
     {
         GameUI.Instance.changeCamera((currentTeam == 0) ? CameraAngle.whiteTeam : CameraAngle.blackTeam);
     }
-    
+    private void OnMakeMoveClient(NetMessage msg)
+    {
+        NetMakeMove mm = msg as NetMakeMove;
+
+        Debug.Log($"MM : {mm.teamId} : {mm.originalX} {mm.originalY} -> {mm.destinationX} {mm.destinationY}");
+
+        if (mm.teamId != currentTeam)
+        {
+            ChessPiece target = chessPieces[mm.originalX, mm.originalY];
+
+            availableMoves = target.GetAvailableMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y);
+            specialMove = target.GetSpecialMoves(ref chessPieces, ref moveList, ref availableMoves);
+
+            MoveTo(mm.originalX, mm.originalY, mm.destinationX, mm.destinationY);
+        }
+    }    
+
     // 
     private void OnSetLocalGame(bool v)
     {
