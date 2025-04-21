@@ -132,6 +132,8 @@ public class Chessboard : MonoBehaviour
                 else
                 {
                     currentlyDragging.SetPosition(GetTileCenter(previousPosition.x, previousPosition.y));
+                    currentlyDragging = null;
+                    RemoveHighlightTiles();
                 }
             }
         }
