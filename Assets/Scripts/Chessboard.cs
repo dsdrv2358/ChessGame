@@ -683,7 +683,7 @@ public class Chessboard : MonoBehaviour
     }
 
     #region
-    private void RegsisterEvents()
+    private void RegisterEvents()
     {
         NetUtility.S_WELCOME += OnWelcomeServer;
 
