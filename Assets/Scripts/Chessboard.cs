@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Networking.Transport;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -51,6 +52,8 @@ public class Chessboard : MonoBehaviour
         GenerateAllTiles(tileSize, TILE_COUNT_X, TILE_COUNT_Y);
         SpawnAllPieces();
         PositionAllPieces();
+
+        RegisterEvents();
     }
     private void Update()
     {
@@ -674,4 +677,23 @@ public class Chessboard : MonoBehaviour
 
         return -Vector2Int.one; // Invalid
     }
+
+    #region
+    private void RegsisterEvents()
+    {
+        NetUtility.S_WELCOME += OnWelcomeServer;
+    }
+    private void UnRegisterEvents()
+    {
+
+    }
+
+    // Server
+    private void OnWelcomeServer(NetMessage arg1, NetworkConnection arg2)
+    {
+        throw new NotImplementedException();
+    }
+
+    // Client
+    #endregion
 }
