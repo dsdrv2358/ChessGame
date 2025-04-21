@@ -706,6 +706,12 @@ public class Chessboard : MonoBehaviour
 
         // Return back to the client
         Server.Instance.SendToClient(cnn, nw);
+
+        // If full, start the game
+        if (playerCount == 1)
+        {
+            Server.Instance.Broadcast(new NetStartGame());
+        }
     }
 
     // Client
