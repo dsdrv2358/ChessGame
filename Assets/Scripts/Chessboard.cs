@@ -132,8 +132,6 @@ public class Chessboard : MonoBehaviour
                 else
                 {
                     currentlyDragging.SetPosition(GetTileCenter(previousPosition.x, previousPosition.y));
-                    currentlyDragging = null;
-                    RemoveHighlightTiles();
                 }
             }
         }
@@ -671,6 +669,11 @@ public class Chessboard : MonoBehaviour
         moveList.Add(new Vector2Int[] {previousPosition, new Vector2Int(x,y)});
 
         ProcessSpecialMove();
+
+        if (currentlyDragging)
+            currentlyDragging = null;
+        currentlyDragging = null;
+        RemoveHighlightTiles();
 
         switch (CheckForCheckmate())
         {
