@@ -4,6 +4,7 @@ using Unity.Networking.Transport;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public enum SpecialMove
 {
@@ -25,7 +26,7 @@ public class Chessboard : MonoBehaviour
     [SerializeField] private float dragOffset = 1.5f;
     [SerializeField] private GameObject victoryScreen;
     [SerializeField] private Transform rematchIndicator;
-    [SerializeField] private Button rematchButton;
+    [SerializeField] private UnityEngine.UI.Button rematchButton;
 
     [Header("Prefabs & Materials")]
     [SerializeField] private GameObject[] prefabs;
@@ -315,6 +316,9 @@ public class Chessboard : MonoBehaviour
     public void GameReset()
     {
         // UI
+
+        rematchButton.interactable = true;
+
         rematchIndicator.transform.GetChild(0).gameObject.SetActive(false);
         rematchIndicator.transform.GetChild(1).gameObject.SetActive(false);
 
@@ -823,6 +827,7 @@ public class Chessboard : MonoBehaviour
             rematchIndicator.transform.GetChild((rm.wantRematch == 1) ? 0 : 1).gameObject.SetActive(true);
             if (rm.wantRematch != 1)
             {
+                rematchButton.interactable = false;
             }
         }
 
