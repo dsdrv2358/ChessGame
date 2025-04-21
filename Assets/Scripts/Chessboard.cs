@@ -121,6 +121,13 @@ public class Chessboard : MonoBehaviour
                     MoveTo(previousPosition.x, previousPosition.y, hitPosition.x, hitPosition.y);
 
                     // Net implementation
+                    NetMakeMove mm = new NetMakeMove();
+                    mm.originalX = previousPosition.x;
+                    mm.originalY = previousPosition.y;
+                    mm.destinationX = hitPosition.x;
+                    mm.destinationY = hitPosition.y;
+                    mm.teamId = currentTeam;
+                    Client.Instance.SendToServer(mm);
                 }
                 else
                 {
