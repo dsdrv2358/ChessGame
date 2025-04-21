@@ -115,13 +115,19 @@ public class Chessboard : MonoBehaviour
             if (currentlyDragging != null && Input.GetMouseButtonUp(0))
             {
                 Vector2Int previousPosition = new Vector2Int(currentlyDragging.currentX, currentlyDragging.currentY);
-            
-                bool validMove = MoveTo(currentlyDragging, hitPosition.x, hitPosition.y);
-                if (!validMove)
+
+                if (ContainsValidMove(ref availableMoves, new Vector2Int(hitPosition.x,hitPosition.y)))
+                {
+                    MoveTo(previousPosition.x, previousPosition.y, hitPosition.x, hitPosition.y);
+
+                    // Net implementation
+                }
+                else
+                {
                     currentlyDragging.SetPosition(GetTileCenter(previousPosition.x, previousPosition.y));
-                
-                currentlyDragging = null;
-                RemoveHighlightTiles();
+                    currentlyDragging = null;
+                    RemoveHighlightTiles();
+                }
             }
         }
         else
@@ -605,12 +611,10 @@ public class Chessboard : MonoBehaviour
 
         return false;
     }
-    private bool MoveTo(ChessPiece cp, int x, int y)
+    private void MoveTo(int originalX, int originalY, int x, int y)
     {
-        if (!ContainsValidMove(ref availableMoves, new Vector2Int(x,y)))
-            return false;
-
-        Vector2Int previousPosition = new Vector2Int(cp.currentX, cp.currentY);
+        ChessPiece cp = chessPieces[originalX, originalY];
+        Vector2Int previousPosition = new Vector2Int(originalX, originalY);
 
         // Is there another piece in the target position?
         if (chessPieces[x, y] != null)
@@ -618,7 +622,7 @@ public class Chessboard : MonoBehaviour
             ChessPiece ocp = chessPieces[x, y];
 
             if (cp.team == ocp.team)
-                return false;
+                return;
 
             //If it's the enemy team
             if (ocp.team == 0)
@@ -673,7 +677,7 @@ public class Chessboard : MonoBehaviour
                 break;
         }
 
-        return true;
+        return;
     }
     private Vector2Int LookupTileIndex(GameObject hitInfo)
     {
