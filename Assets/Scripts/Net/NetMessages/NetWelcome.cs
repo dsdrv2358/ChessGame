@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class NetWelcome : NetMessage
 {
+    public int AssignedTeam { set; get; }
+
     public NetWelcome()
     {
         Code = OpCode.WELCOME;
@@ -11,5 +13,15 @@ public class NetWelcome : NetMessage
     {
         Code = OpCode.WELCOME;
         Deserialize(reader);
+    }
+
+    public override void Serialize(ref DataStreamWriter writer)
+    {
+        writer.WriteByte((byte)Code);
+        writer.WriteInt(AssignedTeam);
+    }
+    public override void Deserialize(DataStreamReader reader)
+    {
+        AssignedTeam = reader.ReadInt();
     }
 }
