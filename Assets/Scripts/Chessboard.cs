@@ -25,6 +25,7 @@ public class Chessboard : MonoBehaviour
     [SerializeField] private float dragOffset = 1.5f;
     [SerializeField] private GameObject victoryScreen;
     [SerializeField] private Transform rematchIndicator;
+    [SerializeField] private Button rematchButton;
 
     [Header("Prefabs & Materials")]
     [SerializeField] private GameObject[] prefabs;
@@ -362,8 +363,7 @@ public class Chessboard : MonoBehaviour
         GameReset();
         GameUI.Instance.OnLeaveFromGameMenu();
 
-        Client.Instance.Shutdown();
-        Server.Instance.Shutdown();
+        Invoke("ShutdownRelay", 1.0f);
 
         // Reset some values
         playerCount = -1;
@@ -819,16 +819,28 @@ public class Chessboard : MonoBehaviour
 
         // Activate the piece of UI
         if (rm.teamId != currentTeam)
+        {
             rematchIndicator.transform.GetChild((rm.wantRematch == 1) ? 0 : 1).gameObject.SetActive(true);
-        
+            if (rm.wantRematch != 1)
+            {
+            }
+        }
+
         // If both want a rematch
         if (playerRematch[0] && playerRematch[1])
             GameReset();
     }    
 
     // 
+    private void ShutdownRelay()
+    {
+        Client.Instance.Shutdown();
+        Server.Instance.Shutdown();
+    }
     private void OnSetLocalGame(bool v)
     {
+        playerCount -= 1;
+        currentTeam = -1;
         localGame = v;
     }
     #endregion
