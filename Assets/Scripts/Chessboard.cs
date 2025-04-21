@@ -48,6 +48,7 @@ public class Chessboard : MonoBehaviour
     // Multi logic
     private int playerCount = -1;
     private int currentTeam = -1;
+    private bool localGame = true;
 
     private void Awake()
     {
@@ -654,6 +655,8 @@ public class Chessboard : MonoBehaviour
         PositionSinglePiece(x,y);
 
         isWhiteTurn = !isWhiteTurn;
+        if (localGame)
+        currentTeam = (currentTeam == 0) ? 1 : 0;
         moveList.Add(new Vector2Int[] {previousPosition, new Vector2Int(x,y)});
 
         ProcessSpecialMove();
@@ -689,10 +692,17 @@ public class Chessboard : MonoBehaviour
 
         NetUtility.C_WELCOME += OnWelcomeClient;
         NetUtility.C_START_GAME += OnStartGameClient;
+
+        GameUI.Instance.SetLocalGame += OnSetLocalGame;
     }
     private void UnRegisterEvents()
     {
+        NetUtility.S_WELCOME -= OnWelcomeServer;
 
+        NetUtility.C_WELCOME -= OnWelcomeClient;
+        NetUtility.C_START_GAME -= OnStartGameClient;
+
+        GameUI.Instance.SetLocalGame -= OnSetLocalGame;
     }
 
     // Server
@@ -724,10 +734,19 @@ public class Chessboard : MonoBehaviour
         currentTeam = nw.AssignedTeam;
 
         Debug.Log($"My assigned team is {nw.AssignedTeam}");
+
+        if(localGame && currentTeam == 0)
+            Server.Instance.Broadcast(new NetStartGame());
     }
     private void OnStartGameClient(NetMessage obj)
     {
         GameUI.Instance.changeCamera((currentTeam == 0) ? CameraAngle.whiteTeam : CameraAngle.blackTeam);
+    }
+    
+    // 
+    private void OnSetLocalGame(bool v)
+    {
+        localGame = v;
     }
     #endregion
 }
