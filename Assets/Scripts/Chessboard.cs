@@ -50,7 +50,7 @@ public class Chessboard : MonoBehaviour
     private int currentTeam = -1;
     private bool localGame = true;
 
-    private void Awake()
+    private void Start()
     {
         isWhiteTurn = true;
 
