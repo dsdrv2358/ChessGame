@@ -727,7 +727,7 @@ public class Chessboard : MonoBehaviour
     }
     private void OnStartGameClient(NetMessage obj)
     {
-        // We just need to change the camera
+        GameUI.Instance.changeCamera((currentTeam == 0) ? CameraAngle.whiteTeam : CameraAngle.blackTeam);
     }
     #endregion
 }

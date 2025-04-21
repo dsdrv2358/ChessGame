@@ -24,6 +24,15 @@ public class GameUI : MonoBehaviour
         Instance = this;
     }
 
+    // Cameras
+    public void changeCamera(CameraAngle index)
+    {
+        for (int i = 0; i < cameraAngles.Length; i++)
+            cameraAngles[i].SetActive(false);
+
+        cameraAngles[(int)index].SetActive(true);
+    }
+
     // Buttons
     public void OnLocalGameButton()
     {
